@@ -1,6 +1,18 @@
 from flask import Flask, render_template
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired, Email
+
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6'
+
+
+class ContactForm(FlaskForm):
+    name = StringField('Your name', validators=[DataRequired()])
+    email = StringField('Your email', validators=[DataRequired(), Email()])
+    message = TextAreaField('Message', validators=[DataRequired()])
+    submit = SubmitField('Submit', validators=[DataRequired()])
 
 
 @app.route("/")
@@ -13,9 +25,14 @@ def about():
     return render_template('about.html')
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
-    return render_template('contact.html')
+    form = ContactForm()
+    if form.validate_on_submit():
+        print(form.message.data)
+        return render_template('contact.html', form=form, success=True)
+    else:
+        return render_template('contact.html', form=form)
 
 
 if __name__ == "__main__":

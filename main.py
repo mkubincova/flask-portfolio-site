@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email
+import json
 
 
 app = Flask(__name__)
@@ -22,7 +23,10 @@ def home():
 
 @app.route("/about")
 def about():
-    return render_template('about.html')
+    f = open('projects.json')
+    data = json.load(f)
+    f.close()
+    return render_template('about.html', projects=data['projects'])
 
 
 @app.route("/contact", methods=["GET", "POST"])

@@ -100,83 +100,23 @@
       </div>
     </section>
 
-    <section class="py-12 sm:py-20">
+{% if projects %}
+    <section class="py-12 sm:py-20 max-w-screen-xl mx-auto px-4">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl lg:text-center">
           <p class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Featured projects</p>
           <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum pulvinar et feugiat blandit at. In mi viverra elit nunc.</p>
         </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 sm:mt-20">
-          <div class="grid gap-4">
-              <div>
-                <a href="#" class="hover:opacity-80">
-                  <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
-                </a>
-              </div>
-              <div>
-                <a href="#" class="hover:opacity-80">
-                  <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
-                </a>
-              </div>
-              <div>
-                <a href="#" class="hover:opacity-80">
-                  <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
-                </a>
-              </div>
-          </div>
-          <div class="grid gap-4">
-              <div>
-                <a href="#" class="hover:opacity-80">
-                  <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
-                </a>
-              </div>
-              <div>
-                <a href="#" class="hover:opacity-80">
-                  <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg" alt="">
-                </a>
-              </div>
-              <div>
-                <a href="#" class="hover:opacity-80">
-                  <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg" alt="">
-                </a>
-              </div>
-          </div>
-          <div class="grid gap-4">
-              <div>
-                <a href="#" class="hover:opacity-80">
-                  <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg" alt="">
-                </a>
-              </div>
-              <div>
-                <a href="#" class="hover:opacity-80">
-                  <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg" alt="">
-                </a>
-              </div>
-              <div>
-                <a href="#" class="hover:opacity-80">
-                  <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg" alt="">
-                </a>
-              </div>
-          </div>
-          <div class="grid gap-4">
-              <div>
-                <a href="#" class="hover:opacity-80">
-                  <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg" alt="">
-                </a>
-              </div>
-              <div>
-                <a href="#" class="hover:opacity-80">
-                  <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg" alt="">
-                </a>
-              </div>
-              <div>
-                <a href="#" class="hover:opacity-80">
-                  <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg" alt="">
-                </a>
-              </div>
-          </div>
       </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 sm:mt-20">
+          {% for project in projects %}
+            {% if loop.first or loop.index0 % 3 == 0 %}<div class="grid gap-4">{% endif %}
+                <a href="{{project.link}}" class="hover:opacity-80">
+                  <img class="h-auto max-w-full rounded-lg" src="{{project.img_url}}" alt="">
+                </a>
+            {% if loop.index % 3 == 0 %}</div>{% endif %}
+          {% endfor %}
       </div>
     </section>
-
+{% endif %}
 {% endblock %}
